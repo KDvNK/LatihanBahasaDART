@@ -1,12 +1,9 @@
 import 'dart:io';
 
-void main(List<String> arguments) {
-  // stdout.write("Input N = ");
-  // int? n = int.parse(stdin.readLineSync()!);
-
-  for (int i = 0; i <= 4; i++) {
-    for (int j = 1; j <= 8; j++) {
-      if (j >= 5 - i && j <= 4 + i) {
+void func1(int n) {
+  for (int i = 0; i <= n; i++) {
+    for (int j = 1; j <= n * 2; j++) {
+      if (j >= n + 1 - i && j <= n + i) {
         stdout.write(" ");
       } else {
         stdout.write(i);
@@ -23,15 +20,61 @@ void main(List<String> arguments) {
     }
     print(" ");
   }
+}
 
-  // for (int i = 0; i <= 5; i++) {
-  //   for (int j = 1; j <= 5 - i; j++) stdout.write("*");
-  //   for (int j = 1; j <= 2 * i - 1; j++) stdout.write("$i");
+void func2(int n) {
+  int row = 1;
+  for (double i = n / 2; i > 0; i--) {
+    //print upper part
+    for (int j = 1; j <= i; j++) {
+      stdout.write("*");
+    }
+    for (int j = 1; j <= row; j++) {
+      stdout.write(row);
+      stdout.write(" ");
+      // if (row == 1) {
+      //   stdout.write("**");
+      // } else if (row % 2 == 0) {
+      //   stdout.write("*");
+      // } else {
+      //   stdout.write(" ");
+      // }
+    }
+    print(" "); //move to next line
+    row++;
+  }
+  for (int i = 0; i <= n / 2; i++) {
+    for (int j = 1; j <= i; j++) {
+      stdout.write("*");
+    }
+    for (int j = row; j >= 1; j--) {
+      //print lower part
+      stdout.write(row);
+      stdout.write(" ");
+    }
+    print(" "); //move to next line
+    row--;
+  }
+
+  // for (int i = 0; i <= n; i++) {
+  //   for (int j = 1; j <= n - i; j++) stdout.write("*");
+  //   for (int j = 1; j <= n * i - 1; j++) stdout.write("$i");
   //   print("*");
   // }
-  // for (int i = 5 - 1; i >= 1; i--) {
-  //   for (int j = 1; j <= 5 - i; j++) stdout.write(" ");
-  //   for (int j = 1; j <= 2 * i - 1; j++) stdout.write("$i");
+  // for (int i = n - 1; i >= 1; i--) {
+  //   for (int j = 1; j <= n - i; j++) stdout.write(" ");
+  //   for (int j = 1; j <= n * i - 1; j++) stdout.write("$i");
   //   print(" ");
   // }
+}
+
+void main(List<String> arguments) {
+  stdout.write("Input N = ");
+  String? dtInput1 = stdin.readLineSync();
+  int n1 = int.parse(dtInput1!);
+  func1(n1);
+  stdout.write("Input N = ");
+  String? dtInput2 = stdin.readLineSync();
+  int n2 = int.parse(dtInput2!);
+  func2(n2);
 }
